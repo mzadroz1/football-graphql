@@ -1,0 +1,72 @@
+type Query {
+    clubs: [Club]
+    club(id: ID!): Club
+    clubsRanking: [ClubRanked]
+    players: [Player]
+    playersStatistics: [PlayerStatistics]
+    playerStatistics(id: ID!): PlayerStatistics
+    matches(clubId: ID!): [Match]
+}
+
+type Club {
+    clubId: ID!
+    name: String!
+    shortName: String!
+    foundingDate: Date!
+    homeMatches: [Match]
+    visitorMatches: [Match]
+    players: [Player]
+}
+
+type ClubRanked {
+    club: Club!
+    rank : PositiveInt!
+    matchCount : NonNegativeInt!
+    winsCount : NonNegativeInt!
+    drawsCount : NonNegativeInt!
+    losesCount : NonNegativeInt!
+    goalsScored : NonNegativeInt!
+    goalsConceded : NonNegativeInt!
+    points : NonNegativeInt!
+}
+
+type Player {
+    playerId: ID!
+    name: String!
+    surname: String!
+    nationality: String!
+    birthDate: Date!
+    height: PositiveInt!
+    weight: PositiveInt!
+    club: Club!
+    playerMatches: [PlayerMatch]
+}
+
+type PlayerStatistics {
+    player: Player!
+    matchCount: NonNegativeInt!
+    goalsScored: NonNegativeInt!
+    yellowCards: NonNegativeInt!
+    redCards: NonNegativeInt!
+}
+
+type Match {
+    matchId: ID!
+    matchDate: Date!
+    host: Club!
+    visitor: Club!
+    hostGoals: NonNegativeInt!
+    visitorGoals: NonNegativeInt!
+    playerMatches: [PlayerMatch]
+}
+
+type PlayerMatch {
+    match: Match!
+    player: Player!
+    shirtNumber: PositiveInt!
+    goals: NonNegativeInt!
+    yellowCards: NonNegativeInt!
+    redCard: NonNegativeInt!
+    startTime: NonNegativeInt!
+    endTime: NonNegativeInt!
+}
