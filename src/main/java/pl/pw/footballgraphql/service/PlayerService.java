@@ -22,6 +22,10 @@ public class PlayerService {
         return playerRepository.findAll();
     }
 
+    public List<Player> getAllPlayersFromClub(String clubId) {
+        return playerRepository.findByClub_ClubId(Long.parseLong(clubId));
+    }
+
     public PlayerStatistics getPlayerStatistics(String id) {
         Long playerId = Long.parseLong(id);
         Player player = playerRepository.findById(playerId)

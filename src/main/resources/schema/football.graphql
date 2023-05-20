@@ -3,6 +3,7 @@ type Query {
     club(id: ID!): Club
     clubsRanking: [ClubRanked]
     players: [Player]
+    playersFromClub(clubId: ID!): [Player]
     playersStatistics: [PlayerStatistics]
     playerStatistics(id: ID!): PlayerStatistics
     matches(clubId: ID!): [Match]
@@ -16,18 +17,6 @@ type Club {
     homeMatches: [Match]
     visitorMatches: [Match]
     players: [Player]
-}
-
-type ClubRanked {
-    club: Club!
-    rank : PositiveInt!
-    matchCount : NonNegativeInt!
-    winsCount : NonNegativeInt!
-    drawsCount : NonNegativeInt!
-    losesCount : NonNegativeInt!
-    goalsScored : NonNegativeInt!
-    goalsConceded : NonNegativeInt!
-    points : NonNegativeInt!
 }
 
 type Player {
@@ -69,4 +58,16 @@ type PlayerMatch {
     redCard: NonNegativeInt!
     startTime: NonNegativeInt!
     endTime: NonNegativeInt!
+}
+
+type ClubRanked {
+    club: Club!
+    rank : PositiveInt!
+    matchCount : NonNegativeInt!
+    winsCount : NonNegativeInt!
+    drawsCount : NonNegativeInt!
+    losesCount : NonNegativeInt!
+    goalsScored : NonNegativeInt!
+    goalsConceded : NonNegativeInt!
+    points : NonNegativeInt!
 }

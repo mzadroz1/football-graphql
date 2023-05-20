@@ -24,6 +24,11 @@ public class PlayerResolver {
     }
 
     @DgsQuery
+    public List<Player> playersFromClub(@InputArgument String clubId) {
+        return playerService.getAllPlayersFromClub(clubId);
+    }
+
+    @DgsQuery
     public List<PlayerStatistics> playersStatistics() {
         return playerService.getPlayersStatistics();
     }

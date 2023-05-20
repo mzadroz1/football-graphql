@@ -11,7 +11,6 @@ import java.util.List;
 
 @DgsComponent
 public class ClubResolver {
-
     private final ClubService clubService;
 
     public ClubResolver(ClubService clubService) {
