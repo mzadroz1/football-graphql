@@ -3,11 +3,12 @@ package pl.pw.footballgraphql.service;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import pl.pw.footballgraphql.entity.Player;
+import pl.pw.footballgraphql.entity.PlayerMatch;
 import pl.pw.footballgraphql.entity.PlayerStatistics;
 import pl.pw.footballgraphql.repository.PlayerRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 @Service
 public class PlayerService {
@@ -22,29 +23,13 @@ public class PlayerService {
         return playerRepository.findAll();
     }
 
-    public List<Player> getAllPlayersFromClub(String clubId) {
-        return playerRepository.findByClub_ClubId(Long.parseLong(clubId));
-    }
-
-    public PlayerStatistics getPlayerStatistics(String id) {
-        Long playerId = Long.parseLong(id);
-        Player player = playerRepository.findById(playerId)
-                .orElseThrow(() -> new IllegalArgumentException("Player with given id=" + id + " not found"));
-        return getPlayerStatistics(player);
-    }
-
-    public List<PlayerStatistics> getPlayersStatistics() {
-        return playerRepository.findAll().stream()
-                .map(PlayerService::getPlayerStatistics)
-                .collect(Collectors.toList());
-    }
-
     @NotNull
-    private static PlayerStatistics getPlayerStatistics(Player player) {
+    public PlayerStatistics getPlayerStatistics(Player player) {
         PlayerStatistics playerStatistics = new PlayerStatistics();
-        playerStatistics.setMatchCount(player.getPlayerMatches().size());
+        Set<PlayerMatch> playerMatches = player.getPlayerMatches();
+        playerStatistics.setMatchCount(playerMatches.size());
         playerStatistics.setPlayer(player);
-        player.getPlayerMatches().forEach(
+        playerMatches.forEach(
                 playerMatch -> {
                     playerStatistics.setGoalsScored(playerStatistics.getGoalsScored() + playerMatch.getGoals());
                     playerStatistics.setYellowCards(playerStatistics.getYellowCards() + playerMatch.getYellowCards());

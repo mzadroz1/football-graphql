@@ -37,9 +37,20 @@ public class Player {
     @JoinColumn(name = "club_id", nullable = false)
     private Club club;
 
+    @Transient
+    private PlayerStatistics playerStatistics;
+
     @OneToMany(mappedBy = "player")
     @BatchSize(size = 100)
     private Set<PlayerMatch> playerMatches = new LinkedHashSet<>();
+
+    public PlayerStatistics getPlayerStatistics() {
+        return playerStatistics;
+    }
+
+    public void setPlayerStatistics(PlayerStatistics playerStatistics) {
+        this.playerStatistics = playerStatistics;
+    }
 
     public Long getPlayerId() {
         return playerId;

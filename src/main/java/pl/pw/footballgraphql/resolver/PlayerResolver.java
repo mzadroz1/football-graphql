@@ -1,10 +1,9 @@
 package pl.pw.footballgraphql.resolver;
 
-import com.netflix.graphql.dgs.DgsComponent;
-import com.netflix.graphql.dgs.DgsQuery;
-import com.netflix.graphql.dgs.InputArgument;
+import com.netflix.graphql.dgs.*;
 import pl.pw.footballgraphql.entity.Player;
 import pl.pw.footballgraphql.entity.PlayerStatistics;
+import pl.pw.footballgraphql.generated.DgsConstants;
 import pl.pw.footballgraphql.service.PlayerService;
 
 import java.util.List;
@@ -23,19 +22,12 @@ public class PlayerResolver {
         return playerService.getAllPlayers();
     }
 
-    @DgsQuery
-    public List<Player> playersFromClub(@InputArgument String clubId) {
-        return playerService.getAllPlayersFromClub(clubId);
-    }
 
-    @DgsQuery
-    public List<PlayerStatistics> playersStatistics() {
-        return playerService.getPlayersStatistics();
-    }
 
-    @DgsQuery
-    public PlayerStatistics playerStatistics(@InputArgument String id) {
-        return playerService.getPlayerStatistics(id);
+    @DgsData(parentType = DgsConstants.PLAYER.TYPE_NAME, field = DgsConstants.PLAYER.PlayerStatistics)
+    public PlayerStatistics playerStatistics(DgsDataFetchingEnvironment dfe) {
+        Player player = dfe.getSource();
+        return playerService.getPlayerStatistics(player);
     }
 
 }

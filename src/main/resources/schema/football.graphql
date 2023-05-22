@@ -1,11 +1,7 @@
 type Query {
     clubs: [Club]
     club(id: ID!): Club
-    clubsRanking: [ClubRanked]
     players: [Player]
-    playersFromClub(clubId: ID!): [Player]
-    playersStatistics: [PlayerStatistics]
-    playerStatistics(id: ID!): PlayerStatistics
     matches(clubId: ID!): [Match]
 }
 
@@ -29,6 +25,7 @@ type Player {
     weight: PositiveInt!
     club: Club!
     playerMatches: [PlayerMatch]
+    playerStatistics: PlayerStatistics
 }
 
 type PlayerStatistics {

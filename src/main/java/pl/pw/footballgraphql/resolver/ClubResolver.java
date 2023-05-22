@@ -4,7 +4,6 @@ import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
 import pl.pw.footballgraphql.entity.Club;
-import pl.pw.footballgraphql.generated.types.ClubRanked;
 import pl.pw.footballgraphql.service.ClubService;
 
 import java.util.List;
@@ -27,8 +26,4 @@ public class ClubResolver {
         return clubService.getClubs(id);
     }
 
-//    @DgsQuery
-//    public List<ClubRanked> clubsRanking() {
-//
-//    }
 }
