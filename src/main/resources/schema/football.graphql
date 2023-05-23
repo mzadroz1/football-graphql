@@ -56,15 +56,3 @@ type PlayerMatch {
     startTime: NonNegativeInt!
     endTime: NonNegativeInt!
 }
-
-type ClubRanked {
-    club: Club!
-    rank : PositiveInt!
-    matchCount : NonNegativeInt!
-    winsCount : NonNegativeInt!
-    drawsCount : NonNegativeInt!
-    losesCount : NonNegativeInt!
-    goalsScored : NonNegativeInt!
-    goalsConceded : NonNegativeInt!
-    points : NonNegativeInt!
-}
